@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="app/styles.css" rel="stylesheet" />
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="./app/pfx.eval.js"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="app/surface3d.js"></script>
+</head>
+<body>
+    <h1>
+        <p>
+        D3.js Surface Plots
+        </p>
+    </h1>
+
+    <script>
+        var pfxCalc = PfxCalculator;
+        pfxCalc.variables("x", "y");
+        pfx = [];
+        var parts = 20;
+        var d3Data = [
+            {
+                name: "Empty",
+                generate: function () {
+                    var mtx = [];
+                    for (var i = -parts; i < parts; i++) {
+                        var row = [];
+                        for (var j = -parts; j < parts; j++) {
+                            row.push(null);
+                        }
+                        mtx.push(row);
+                    }
+                    return mtx;
+                }
+            },
+            {
+                name: "Full",
+                generate: function () {
+                    var output = [];
+                    for (var x = -parts; x < parts; x++) {
+                        var row = [];
+                        output.push(row);
+                        for (var y = -parts; y < parts; y++) {
+                            row.push(pfxCalc.Eval(pfx, x, y));
+                        }                        
+                    }
+                    return output;
+                }
+            }
+        ];
+        var yaw = 0.5, pitch = 0.5, width = 700, height = 400, drag = false;
+        var svg = d3.select('body')
+            .append('svg')
+            .attr('height', height)
+            .attr('width', width);
+        
+        var group = svg.append("g");
+        
+        var surface = group.data([d3Data[0].generate()])
+            .surface3D(width, height)
+            .surfaceHeight(function (d) { return d; })
+            .surfaceColor(function (d) {
+                var c = d3.hsl((d + 100), 0.6, 0.5).rgb();
+                return "rgb(" + parseInt(c.r) + "," + parseInt(c.g) + "," + parseInt(c.b) + ")";
+            });
+        
+        surface.refresh();
+
+        svg.on("mousedown", function () {
+            drag = [d3.mouse(this), yaw, pitch];
+        }).on("mouseup", function () {
+            drag = false;
+        }).on("mousemove", function () {
+            if (drag) {
+                var mouse = d3.mouse(this);
+                yaw = drag[1] - (mouse[0] - drag[0][0]) / 50;
+                pitch = drag[2] + (mouse[1] - drag[0][1]) / 50;
+                pitch = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, pitch));
+                surface.turntable(yaw, pitch);
+            }
+        });
+        var URL = "api/Math/PostFix";
+        var postfix = function (formulae, variables) {
+            var data = {
+                Formulae: formulae,
+                Variables: variables
+            }
+            return $.ajax({
+                url: URL,
+                type: "POST",
+                //crossDomain: true,
+                contentType: 'application/json; charset=UTF-8',
+                dataType: "json",
+                data: JSON.stringify(data)
+            });
+        }
+
+        //"cos(x / 15 * 3.14) * cos(y / 15 * 3.14) * 60 + cos(x / 8 * 3.14) *  cos(y / 10 * 3.14) * 40"
+
+        postfix("30*cos(3.14*x*y/120)", ['x', 'y'])
+            .done(function (data) {
+                pfx = data;
+                pfx.push("s");
+                console.log(pfx);
+                group.data([d3Data[1].generate()]).surface3D()
+                    .transition().duration(500)
+                    .surfaceHeight(function (d) {
+                        return d;
+                    })
+                    .surfaceColor(function (d) {
+                        var c = d3.hsl((d + 100), 0.6, 0.5).rgb();
+                        return "rgb(" + parseInt(c.r) + "," + parseInt(c.g) + "," + parseInt(c.b) + ")";
+                    });
+
+            });
+        
+    </script>
+</body>
+</html>
