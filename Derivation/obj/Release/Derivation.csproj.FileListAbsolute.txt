@@ -1,0 +1,6 @@
+C:\Users\Nikitas\Desktop\Angular2\D3Test\Derivation\Derivation\bin\Release\Derivation.dll.config
+C:\Users\Nikitas\Desktop\Angular2\D3Test\Derivation\Derivation\bin\Release\Derivation.dll
+C:\Users\Nikitas\Desktop\Angular2\D3Test\Derivation\Derivation\bin\Release\Derivation.pdb
+C:\Users\Nikitas\Desktop\Angular2\D3Test\Derivation\Derivation\obj\Release\Derivation.dll
+C:\Users\Nikitas\Desktop\Angular2\D3Test\Derivation\Derivation\obj\Release\Derivation.pdb
+C:\Users\Nikitas\Desktop\Angular2\D3Test\Derivation\Derivation\obj\Release\Derivation.csprojResolveAssemblyReference.cache
