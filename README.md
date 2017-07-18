@@ -1,5 +1,5 @@
-#Web Surface Plots
-#Using D3.js
+# Web Surface Plots
+# Using D3.js
 
 A binary expression tree is a specific kind of a binary tree used to represent expressions. Two common types of expressions that a binary expression tree can represent are algebraic and boolean. These trees can represent expressions that contain both unary and binary operators.
 [ https://en.wikipedia.org/wiki/Binary_expression_tree ]
