@@ -1,4 +1,4 @@
-# Web Surface Plots using D3.js
+# Surface Plots in web using D3.js
 
 Surface plots are diagrams of three-dimensional data. We focus o those that come from functions of 2 variables z=f(x,y)
 For example f(x,y) = cos(x / 15 * 3.14) *cos(y / 15 * 3.14) * 60 + cos(x / 8 * 3.14) *cos(y / 10 * 3.14) * 40 is an expression of x,y.
