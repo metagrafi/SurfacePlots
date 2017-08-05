@@ -1,6 +1,6 @@
 # Surface Plots in web using D3.js
 
-Surface plots are diagrams of three-dimensional data. We focus o those that come from functions of 2 variables z=f(x,y)
+Surface plots are diagrams of three-dimensional data. We focus on those that come from functions of 2 variables z=f(x,y)
 For example f(x,y) = cos(x / 15 * 3.14) *cos(y / 15 * 3.14) * 60 + cos(x / 8 * 3.14) *cos(y / 10 * 3.14) * 40 is an expression of x,y.
 
 A binary expression tree is a specific kind of a binary tree used to represent expressions. Two common types of expressions that a binary expression tree can represent are algebraic and boolean. These trees can represent expressions that contain both unary and binary operators.
