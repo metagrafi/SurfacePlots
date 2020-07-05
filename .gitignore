@@ -3,3 +3,8 @@
 ################################################################################
 
 /.vs/Derivation/v15
+/Derivation/bin/Debug
+/Derivation/obj/Debug
+/MathAPI/bin
+/MathAPI/obj/Debug
+/packages

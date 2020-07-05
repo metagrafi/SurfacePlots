@@ -9,7 +9,7 @@ namespace Derivation
     {
         private Node Q, L = null;
 
-        private char EOL = '\r';
+        private readonly char EOL = '\r';
         private char Cursor;
 
         private int p = 0, errorPos = 0;
