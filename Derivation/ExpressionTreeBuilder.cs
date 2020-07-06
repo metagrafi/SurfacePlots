@@ -233,7 +233,7 @@ namespace Derivation
             while (id < list.Count && !found)
             {
                 var l = list[id].Length;
-                var name = Input.Substring(p, (p + l < Input.Length) ? l : 0);
+                var name = Input.Substring(p, (p + l <= Input.Length) ? l : 0);
                 if (name == list[id])
                 {
                     found = true;
